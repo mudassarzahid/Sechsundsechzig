@@ -1,4 +1,4 @@
-# <div align="center"> Sechsundsechzig (66) – Benutzerhandbuch </div>
+# <div align="center">Sechsundsechzig (66)</div>
 <div align="center">
 <img
 	src="images/title.svg"
@@ -6,22 +6,47 @@
 	width="45%"/>
 </div>
 
-
 ## <img src="images/icon.svg" height="4%" width="4%"/> Inhaltsverzeichnis
-1. [Spielverlauf](#spielverlauf)
-2. [Spielzüge](#spielzuege)
-    - [Karte legen](#legen)
-	- [Offene Trumpfkarte austauschen](#tauschen)
-	- [Pärchen ansagen](#ansagen)
-	- [Deck zumachen](#zumachen)
-	- [Stoppen](#stoppen)
-	- [Karten sortieren](#sortieren)
-3. [Registrierung](#registrierung)
-4. [Gewinnpunkte](#gewinnpunkte)
-5. [Beispiele](#beispiele)
-	- [Regulär](#regulaer)
-	- [Kein Deck mehr](#kein-deck)
-	- [Ende](#ende)
+1. [Benutzerhandbuch](#benutzerhandbuch)
+	1. [Spielverlauf](#spielverlauf)
+	2. [Spielzüge](#spielzuege)
+	    - [Karte legen](#legen)
+		- [Offene Trumpfkarte austauschen](#tauschen)
+		- [Pärchen ansagen](#ansagen)
+		- [Deck zumachen](#zumachen)
+		- [Stoppen](#stoppen)
+		- [Karten sortieren](#sortieren)
+	3. [Registrierung](#registrierung)
+	4. [Gewinnpunkte](#gewinnpunkte)
+	5. [Beispiele](#beispiele)
+		- [Regulär](#regulaer)
+		- [Kein Deck mehr](#kein-deck)
+		- [Ende](#ende)
+2. [Entwicklerhandbuch](#entwicklerhandbuch)
+	1. [Einleitung](#einleitung)
+	2. [Module](#modules)
+   	 1. [World & Universe](#world-and-universe)
+    	    - [Spielzustand](#game-state)
+     	   - [World](#world)
+      	      1. [On-Receive](#on-receive)
+      	      2. [On-Key](#on-key)
+      	      3. [On-Mouse](#on-mouse)
+    	    - [Universe](#universe)
+      	      1. [On-New](#on-new)
+     	       2. [On-Msg](#on-msg)
+  	  2. [Zugverarbeitung](#zugverarbeitung)
+  	  3. [Daten](#daten)
+  	      - [Card](#card)
+  	      - [Card-Sexp](#card-sexp)
+ 	   4. [Hilfsmodule](#hilfsmodule)
+ 	       - [Predicate](#predicate)
+ 	       - [Accessor](#accessor)
+ 	   5. [Rendering](#rendering)
+ 	       - [Graphics](#graphics)
+  	      - [Render](#render)
+	2. [Erweiterungen](#erweiterungen)
+
+# <div align="center">Benutzerhandbuch</div> <a name="benutzerhandbuch"/>
 
 ## <img src="images/icon.svg" height="4%" width="4%"/> Spielverlauf <a name="spielverlauf"/>
 Sechsundsechzig ist ein Zweispieler-Kartenspiel. Es werden 24 Karten benutzt: 9, Bube, Dame, König, 10 und Ass von jeder Farbe einmal. Dabei gibt es ...
@@ -136,41 +161,12 @@ Nun werden einige Beispielszenarien von dem Spiel gezeigt zur Veranschaulichung 
 4. Alle Stiche, die der Gegner gewonnen hat und die Stichpunkte dafür.
 5. Um ein neues Spiel zu starten, muss man klicken.
 
+<br/><br/>
 
-# <div align="center"> Sechsundsechzig (66) – Entwicklerhandbuch </div>
-<div align="center">
-<img
-	src="images/title.svg"
-	height="45%"
-	width="45%"/>
-</div>
-
-## <img src="images/icon.svg" height="4%" width="4%"/> Inhaltsverzeichnis
-1. [Einleitung](#einleitung)
-2. [Module](#modules)
-    1. [World & Universe](#world-and-universe)
-        - [Spielzustand](#game-state)
-        - [World](#world)
-            1. [On-Receive](#on-receive)
-            2. [On-Key](#on-key)
-            3. [On-Mouse](#on-mouse)
-        - [Universe](#universe)
-            1. [On-New](#on-new)
-            2. [On-Msg](#on-msg)
-    2. [Zugverarbeitung](#zugverarbeitung)
-    3. [Daten](#daten)
-        - [Card](#card)
-        - [Card-Sexp](#card-sexp)
-    4. [Hilfsmodule](#hilfsmodule)
-        - [Predicate](#predicate)
-        - [Accessor](#accessor)
-    5. [Rendering](#rendering)
-        - [Graphics](#graphics)
-        - [Render](#render)
-2. [Erweiterungen](#erweiterungen)
+# <div align="center"> Entwicklerhandbuch </div> <a name="entwicklerhandbuch"/>
 
 ## <img src="images/icon.svg" height="4%" width="4%"/> Einleitung <a name="einleitung"/>
-Bei <b>Sechsundsechzig</b> handelt es sich um ein Kartenspiel, das von genau zwei Spielern gespielt werden kann (für Spielregeln und Spielablauf, siehe [Benutzerhandbuch](https://git.informatik.uni-hamburg.de/sav/fpprak21/gruppe-ballers/-/blob/master/benutzerhandbuch/Benutzerhandbuch.md)). Das Programm ist in der Programmiersprache <b>Racket</b> geschrieben und nutzt das `2htdp/universe` Teachpack für eine interaktive und grafische Umsetzung des Kartenspiels.
+Bei <b>Sechsundsechzig</b> handelt es sich um ein Kartenspiel, das von genau zwei Spielern gespielt werden kann (für Spielregeln und Spielablauf, siehe [Benutzerhandbuch](#benutzerhandbuch)). Das Programm ist in der Programmiersprache <b>Racket</b> geschrieben und nutzt das `2htdp/universe` Teachpack für eine interaktive und grafische Umsetzung des Kartenspiels.
 
 ## <img src="images/icon.svg" height="4%" width="4%"/> Module <a name="modules"/>
 Es wurden verschiedene Module programmiert, die bestimmte Aufgaben erfüllen. Abb. 1 gibt eine grobe Übersicht dieser Module.
@@ -346,7 +342,7 @@ Datenmodule sind zuständig für die Verwaltung von statischen Kartendaten – d
 card wird vom _Renderer_ und von der _Welt_ benutzt. Es stellt die Karten mithilfe eines `struct` dar, welcher folgende Attribute besitzt:
 - `card-type`: Die Farbe (`"Kreuz"`, `"Pik"`, `"Herz"`, `"Karo"`)
 - `card-name`: Der Kartenname (`9`, `Bube`, `Dame`, `König`, `Ass`)
-- `card-value`: Der Wert der Karten  (siehe [Benutzerhandbuch](https://git.informatik.uni-hamburg.de/sav/fpprak21/gruppe-ballers/-/blob/master/benutzerhandbuch/Benutzerhandbuch.md))
+- `card-value`: Der Wert der Karten  (siehe [Benutzerhandbuch](#benutzerhandbuch))
 - `card-sort-value`: eine fest vorgelegte Reihenfolge ist, in der die Karten sortiert werden (erst Kreuz, dann Pik, dann Herz, dann Karo und in absteigender Reihenfolge des `card-value`)
 - `card-image`: Bild der Kartenvorderseite
 - `card-back`: Bild der Kartenrückseite
